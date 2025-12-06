@@ -24,7 +24,7 @@ services:
     container_name: baac_pm_nginx
     restart: unless-stopped
     ports:
-      - "8000:80"
+      - "8800:80"
     volumes:
       - ./:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
@@ -39,7 +39,7 @@ services:
     container_name: baac_pm_mysql
     restart: unless-stopped
     ports:
-      - "3306:3306"
+      - "3333:3306"
     environment:
       MYSQL_DATABASE: cuba_laravel
       MYSQL_USER: root
