@@ -48,8 +48,8 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
 # Run post-install scripts now that all files are present
 RUN composer run-script post-autoload-dump
 
-# Clear existing cache
-RUN php artisan cache:clear
+# Clear existing cache using file driver (database not available during build)
+RUN php artisan cache:clear --store=file
 
 # Change ownership of the /var/www directory
 RUN chown -R www-data:www-data /var/www
