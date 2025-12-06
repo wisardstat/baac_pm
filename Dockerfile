@@ -40,6 +40,11 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --no-script
 # Copy existing application directory contents
 COPY . /var/www
 
+# Create necessary directories and set permissions
+RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views \
+    && chmod -R 775 storage \
+    && chmod -R 775 bootstrap/cache
+
 # Run post-install scripts now that all files are present
 RUN composer run-script post-autoload-dump
 
