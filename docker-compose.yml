@@ -84,7 +84,7 @@ services:
       - "8801:80"
     environment:
       PMA_HOST: mysql
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: matrix
     networks:
       - baac_pm_network
     depends_on:
