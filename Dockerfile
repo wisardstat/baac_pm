@@ -34,11 +34,14 @@ WORKDIR /var/www
 # Copy composer files first for better Docker layer caching
 COPY composer.json composer.lock ./
 
-# Install Composer dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install Composer dependencies without running scripts
+RUN composer install --no-dev --optimize-autoloader --no-interaction --no-scripts
 
 # Copy existing application directory contents
 COPY . /var/www
+
+# Run post-install scripts now that all files are present
+RUN composer run-script post-autoload-dump
 
 # Clear existing cache
 RUN php artisan cache:clear
